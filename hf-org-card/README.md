@@ -1,11 +1,13 @@
 ---
 title: llamay
-emoji: 🦙
-colorFrom: indigo
-colorTo: purple
+emoji: 🐚
+colorFrom: yellow
+colorTo: gray
 sdk: static
 pinned: false
 ---
+
+<img src="https://raw.githubusercontent.com/kosa8ai/llamay-hf/main/hf-org-card/icon.svg" alt="llamay" width="96">
 
 # llamay
 

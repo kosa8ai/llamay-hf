@@ -1,3 +1,5 @@
+<img src="hf-org-card/icon.svg" alt="llamay" width="96">
+
 # llamay-hf
 
 Run any GGUF model on the Hugging Face Hub with [llamay](https://llamay.com), and the
@@ -38,7 +40,7 @@ Both commands need llamay 0.4.13 or later. Download it from
 | Path | What it is |
 |---|---|
 | [`huggingface-js/`](huggingface-js/) | The entry that adds llamay to the **Use this model** menu on GGUF model pages, as a patch to [`huggingface/huggingface.js`](https://github.com/huggingface/huggingface.js) |
-| [`hf-org-card/`](hf-org-card/) | The README card and logo for llamay's organization page on the Hub |
+| [`hf-org-card/`](hf-org-card/) | The README card for llamay's organization page on the Hub, with the app icon (`icon.svg`) and a 512 px `avatar.png` made from it |
 
 ## Status
 
