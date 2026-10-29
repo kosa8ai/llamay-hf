@@ -43,7 +43,7 @@ Both commands need llamay 0.4.13 or later. Download it from
 
 - [x] `hf.co/...` references work in `llamay run` and `llamay serve` (tested with 0.4.13)
 - [ ] Organization page on huggingface.co
-- [ ] Local-apps entry proposed upstream in huggingface.js
+- [x] Local-apps entry proposed upstream: [huggingface/huggingface.js#2750](https://github.com/huggingface/huggingface.js/pull/2750) (in review)
 
 ## Licence
 
