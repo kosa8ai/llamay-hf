@@ -1,0 +1,68 @@
+diff --git a/packages/tasks/src/local-apps.spec.ts b/packages/tasks/src/local-apps.spec.ts
+index c45e03e..65e443a 100644
+--- a/packages/tasks/src/local-apps.spec.ts
++++ b/packages/tasks/src/local-apps.spec.ts
+@@ -277,6 +277,23 @@ curl -X POST "http://localhost:8000/v1/chat/completions" \\
+ 		expect(snippet[2].content).toContain('openclaw agent --local --agent main --message "Hello from Hugging Face"');
+ 	});
+ 
++	it("llamay", async () => {
++		const { displayOnModelPage, snippet: snippetFunc } = LOCAL_APPS["llamay"];
++		const model: ModelData = {
++			id: "bartowski/Llama-3.2-3B-Instruct-GGUF",
++			tags: ["conversational"],
++			gguf: { total: 1, context_length: 4096 },
++			inference: "",
++		};
++		const snippet = snippetFunc(model, "Llama-3.2-3B-Instruct-Q4_K_M.gguf");
++
++		expect(displayOnModelPage(model)).toEqual(true);
++		expect(snippet[0].content).toEqual(
++			'llamay run -m hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:Q4_K_M -chat -p "Hello!"'
++		);
++		expect(snippet[1].content).toEqual("llamay serve -m hf.co/bartowski/Llama-3.2-3B-Instruct-GGUF:Q4_K_M");
++	});
++
+ 	it("docker model runner", async () => {
+ 		const { snippet: snippetFunc } = LOCAL_APPS["docker-model-runner"];
+ 		const model: ModelData = {
+diff --git a/packages/tasks/src/local-apps.ts b/packages/tasks/src/local-apps.ts
+index 7357ce4..b8939d9 100644
+--- a/packages/tasks/src/local-apps.ts
++++ b/packages/tasks/src/local-apps.ts
+@@ -239,6 +239,21 @@ const snippetOllama = (model: ModelData, filepath?: string): string => {
+ 	return `ollama run hf.co/${model.id}${getQuantTag(filepath)}`;
+ };
+ 
++const snippetLlamay = (model: ModelData, filepath?: string): LocalAppSnippet[] => {
++	const modelRef = `hf.co/${model.id}${getQuantTag(filepath)}`;
++	return [
++		{
++			title: "Chat with the model",
++			setup: "# Download llamay from https://llamay.com/download/",
++			content: `llamay run -m ${modelRef} -chat -p "Hello!"`,
++		},
++		{
++			title: "Serve it with an OpenAI-compatible API",
++			content: `llamay serve -m ${modelRef}`,
++		},
++	];
++};
++
+ const snippetLocalAI = (model: ModelData, filepath?: string): LocalAppSnippet[] => {
+ 	const command = (binary: string) =>
+ 		["# Load and run the model:", `${binary} huggingface://${model.id}/${filepath ?? "{{GGUF_FILE}}"}`].join("\n");
+@@ -765,6 +780,13 @@ export const LOCAL_APPS = {
+ 		displayOnModelPage: isLlamaCppGgufModel,
+ 		snippet: snippetOllama,
+ 	},
++	llamay: {
++		prettyLabel: "llamay",
++		docsUrl: "https://llamay.com",
++		mainTask: "text-generation",
++		displayOnModelPage: isLlamaCppGgufModel,
++		snippet: snippetLlamay,
++	},
+ 	unsloth: {
+ 		prettyLabel: "Unsloth Desktop",
+ 		docsUrl: "https://unsloth.ai/docs",
