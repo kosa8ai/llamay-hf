@@ -19,4 +19,4 @@ llamay run -m hf.co/bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M -chat -p "Hello!
 - Serves OpenAI- and Anthropic-compatible APIs on localhost
 - Signed downloads for macOS, Windows and Linux
 
-[Download](https://llamay.com/download/) · [Docs](https://llamay.com/docs/) · [Using llamay with the Hub](https://github.com/AzmxAI/llamay-hf)
+[Download](https://llamay.com/download/) · [Docs](https://llamay.com/docs/) · [Using llamay with the Hub](https://github.com/kosa8ai/llamay-hf)
