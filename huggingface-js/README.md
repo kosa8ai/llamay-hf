@@ -9,11 +9,13 @@ On a GGUF model page the entry would show:
 
 ```sh
 # Download llamay from https://llamay.com/download/
+llamay pull hf.co/<owner>/<repo>:<QUANT>
 llamay run -m hf.co/<owner>/<repo>:<QUANT> -chat -p "Hello!"
 llamay serve -m hf.co/<owner>/<repo>:<QUANT>
 ```
 
-The Hub fills in `<QUANT>` from the file the visitor picked.
+The Hub fills in `<QUANT>` from the file the visitor picked. The pull comes first because
+`llamay serve` loads only a model that is already stored.
 
 ## Apply and test it
 
@@ -30,5 +32,5 @@ pnpm run check && pnpm run lint:check && pnpm run format:check
 
 ## Submit it
 
-Open a pull request on `huggingface/huggingface.js` titled
-`[Local apps] Add llamay`. The Hugging Face team reviews and merges these.
+Proposed as [huggingface/huggingface.js#2750](https://github.com/huggingface/huggingface.js/pull/2750).
+The Hugging Face team reviews and merges these.

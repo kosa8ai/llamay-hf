@@ -12,9 +12,10 @@ llamay run -m hf.co/bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M -chat -p "Hello!
 ```
 
 The first run downloads the file, checks its sha256 and stores it; later runs start at once.
-To serve it to other apps instead:
+To serve it to other apps, pull it first; `serve` loads only a stored model:
 
 ```sh
+llamay pull hf.co/bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
 llamay serve -m hf.co/bartowski/SmolLM2-135M-Instruct-GGUF:Q4_K_M
 ```
 
